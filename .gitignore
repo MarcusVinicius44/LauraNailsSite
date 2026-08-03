@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Raw photo sources (not used in the build, kept locally only)
+src/assets/*.HEIC
+src/assets/*.DNG
+src/assets/fotosservicos/
+
+# Legacy assets from earlier version of the site
+src/assets/hero.png
+src/assets/react.svg
+src/assets/vite.svg
+src/assets/LFimg.png
+src/assets/CATALOGO DIGITAL LAURA NAILS.pdf
