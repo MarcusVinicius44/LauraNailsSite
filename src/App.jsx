@@ -2,9 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import lauraPhoto from './assets/laura.jpg'
 
-const WHATSAPP_LINK =
-  'https://wa.me/5579998813429?text=Ol%C3%A1%2C%20Laura!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.'
-const INSTAGRAM_LINK = 'https://instagram.com/studiolaurafabiana'
+const WHATSAPP_LINK = 'https://wa.me/message/KVYQKSMI4INPE1'
+const INSTAGRAM_LINK = 'https://instagram.com/laurafabiananail__'
 
 const NAV_LINKS = [
   { href: '#sobre', label: 'Sobre' },
@@ -158,9 +157,9 @@ function App() {
           <span className="brand-tagline">Nail Designer</span>
         </a>
 
-        <nav className={`main-nav ${menuOpen ? 'open' : ''}`}>
+        <nav className="main-nav">
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+            <a key={link.href} href={link.href}>
               {link.label}
             </a>
           ))}
@@ -181,6 +180,23 @@ function App() {
           <span />
         </button>
       </header>
+
+      <div className={`mobile-nav ${menuOpen ? 'open' : ''}`}>
+        {NAV_LINKS.map((link) => (
+          <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+            {link.label}
+          </a>
+        ))}
+        <a
+          className="nav-cta"
+          href={WHATSAPP_LINK}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setMenuOpen(false)}
+        >
+          Agendar
+        </a>
+      </div>
 
       <main id="top">
         <section className="hero">
@@ -255,6 +271,9 @@ function App() {
           </div>
 
           <p className="services-footnote">
+            <Icon>
+              <path d="M20 6 9 17l-5-5" />
+            </Icon>
             Todos os serviços incluem cutilagem e cuidados pós-atendimento.
           </p>
         </section>
@@ -296,10 +315,10 @@ function App() {
           </p>
           <div className="contact-actions">
             <a className="btn btn-light" href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
-              (79) 9 9881-3429
+              Chamar no WhatsApp
             </a>
             <a className="btn btn-outline-light" href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
-              @studiolaurafabiana
+              @laurafabiananail__
             </a>
           </div>
         </section>
