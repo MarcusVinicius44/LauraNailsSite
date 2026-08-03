@@ -7,9 +7,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 18px clamp(20px, 6vw, 72px);
-  background: rgba(253, 246, 245, 0.85);
+  background: rgba(11, 11, 13, 0.92);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-gold-soft);
 }
 
 .brand {
@@ -23,14 +23,15 @@
   font-family: var(--serif);
   font-size: 26px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--gold-light);
+  letter-spacing: 0.5px;
 }
 
 .brand-tagline {
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--text-light);
+  color: var(--text-onblack-light);
 }
 
 .main-nav {
@@ -42,24 +43,24 @@
 .main-nav a {
   text-decoration: none;
   font-size: 15px;
-  color: var(--text);
+  color: var(--text-onblack);
   transition: color 0.2s;
 }
 
 .main-nav a:hover {
-  color: var(--primary);
+  color: var(--gold-light);
 }
 
 .nav-cta {
-  padding: 9px 20px;
+  padding: 9px 22px;
   border-radius: 999px;
-  background: var(--primary);
-  color: var(--white) !important;
+  background: var(--gold);
+  color: var(--black) !important;
   font-weight: 500;
 }
 
 .nav-cta:hover {
-  background: var(--primary-dark);
+  background: var(--gold-light);
 }
 
 .menu-toggle {
@@ -77,7 +78,7 @@
 .menu-toggle span {
   display: block;
   height: 2px;
-  background: var(--primary);
+  background: var(--gold);
   border-radius: 2px;
 }
 
@@ -85,17 +86,19 @@
 .hero {
   position: relative;
   text-align: center;
-  padding: 110px clamp(20px, 8vw, 120px) 90px;
+  padding: 120px clamp(20px, 8vw, 120px) 96px;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--blush) 0%, var(--cream) 60%);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(201, 169, 97, 0.16) 0%, transparent 60%),
+    var(--black);
 }
 
 .hero-squiggle {
   position: absolute;
   width: 220px;
   height: 220px;
-  color: var(--secondary);
-  opacity: 0.35;
+  color: var(--gold);
+  opacity: 0.25;
   pointer-events: none;
 }
 
@@ -108,14 +111,13 @@
   bottom: -40px;
   left: -40px;
   transform: rotate(180deg);
-  color: var(--primary);
 }
 
 .eyebrow {
   font-size: 13px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--gold);
   font-weight: 500;
   margin-bottom: 14px;
 }
@@ -127,21 +129,22 @@
 .hero h1 {
   font-size: clamp(40px, 6vw, 68px);
   line-height: 1.1;
-  max-width: 16ch;
+  max-width: 17ch;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  color: var(--white);
 }
 
 .hero h1 em {
   font-style: italic;
-  color: var(--secondary);
+  color: var(--gold-light);
 }
 
 .hero-lead {
   max-width: 540px;
   margin: 24px auto 0;
-  color: var(--text-light);
+  color: var(--text-onblack-light);
   font-size: 18px;
   position: relative;
   z-index: 1;
@@ -167,34 +170,34 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: var(--white);
-  box-shadow: var(--shadow);
+  background: var(--gold);
+  color: var(--black);
+  box-shadow: var(--shadow-gold);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
+  background: var(--gold-light);
   transform: translateY(-2px);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--primary);
-  border: 1.5px solid var(--secondary);
+  color: var(--gold-light);
+  border: 1.5px solid var(--border-gold);
 }
 
 .btn-ghost:hover {
-  background: var(--white);
+  background: rgba(201, 169, 97, 0.1);
   transform: translateY(-2px);
 }
 
 .btn-light {
   background: var(--white);
-  color: var(--primary);
+  color: var(--black);
 }
 
 .btn-light:hover {
@@ -204,50 +207,42 @@
 .btn-outline-light {
   background: transparent;
   color: var(--white);
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
 }
 
 .btn-outline-light:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
 /* ---------- about ---------- */
 .about {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 64px;
   align-items: center;
-  padding: 100px clamp(20px, 8vw, 120px);
+  padding: 110px clamp(20px, 8vw, 120px);
   max-width: 1200px;
   margin: 0 auto;
+  background: var(--offwhite);
 }
 
 .about-portrait {
-  width: 260px;
-  height: 260px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  background: linear-gradient(150deg, var(--secondary), var(--primary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 8px;
+  background: linear-gradient(150deg, var(--gold), var(--gold-dark));
   box-shadow: var(--shadow);
   margin: 0 auto;
 }
 
-.about-portrait span {
-  font-family: var(--serif);
-  font-size: 84px;
-  color: var(--white);
-  font-style: italic;
-}
-
-.about-portrait span img {
-  width: 80%;
-  height: 80%;
+.about-portrait img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin: 0 auto;
   border-radius: 50%;
+  border: 3px solid var(--offwhite);
 }
 
 .about-content h2 {
@@ -262,7 +257,7 @@
 }
 
 .about-signoff {
-  color: var(--primary) !important;
+  color: var(--gold-dark) !important;
   font-style: italic;
   font-family: var(--serif);
   font-size: 20px !important;
@@ -271,13 +266,18 @@
 /* ---------- services ---------- */
 .services {
   padding: 100px clamp(20px, 8vw, 120px);
-  background: var(--white);
+  background: var(--black);
   text-align: center;
 }
 
 .section-title {
   font-size: clamp(32px, 4vw, 46px);
   margin-bottom: 56px;
+  color: var(--white);
+}
+
+.gallery .section-title {
+  color: var(--black);
 }
 
 .service-grid {
@@ -290,18 +290,23 @@
 }
 
 .service-card {
-  background: var(--cream);
-  border: 1px solid var(--border);
+  background: var(--black-card);
+  border: 1px solid var(--border-gold-soft);
   border-radius: 20px;
   padding: 32px;
+  transition: border-color 0.2s;
+}
+
+.service-card:hover {
+  border-color: var(--border-gold);
 }
 
 .service-card h3 {
   font-size: 22px;
-  color: var(--secondary);
+  color: var(--gold-light);
   margin-bottom: 20px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-gold-soft);
 }
 
 .service-card ul {
@@ -320,12 +325,16 @@
 
 .service-name {
   font-size: 16px;
-  color: var(--text);
+  color: var(--text-onblack);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.service-unit {
-  color: var(--text-light);
-  font-size: 13px;
+.service-note {
+  color: var(--text-onblack-light);
+  font-size: 12.5px;
+  font-style: italic;
 }
 
 .service-prices {
@@ -337,62 +346,118 @@
 
 .service-price {
   font-weight: 600;
-  color: var(--primary);
+  color: var(--gold);
+  font-size: 17px;
 }
 
-.service-maintenance {
-  font-size: 12px;
-  color: var(--text-light);
-}
-
-/* ---------- care ---------- */
-.care {
-  position: relative;
-  padding: 100px clamp(20px, 8vw, 120px);
-  background: var(--blush);
-  text-align: center;
-  overflow: hidden;
-}
-
-.care-squiggle {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
-  height: 320px;
-  color: var(--secondary);
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.care-grid {
+.decor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.care-card {
-  background: var(--white);
-  border-radius: 18px;
-  padding: 28px 24px;
+  max-width: 800px;
+  margin: 40px auto 0;
   text-align: left;
-  box-shadow: 0 12px 30px -18px rgba(156, 76, 69, 0.3);
 }
 
-.care-card h3 {
+.decor-card {
+  border: 1px solid var(--border-gold);
+  border-radius: 18px;
+  padding: 26px 28px;
+}
+
+.decor-card h3 {
   font-size: 19px;
+  color: var(--gold-light);
   margin-bottom: 10px;
-  color: var(--primary);
 }
 
-.care-card p {
-  color: var(--text-light);
+.decor-card p {
+  color: var(--text-onblack-light);
   font-size: 15px;
+}
+
+.services-footnote {
+  max-width: 640px;
+  margin: 48px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-gold-soft);
+  color: var(--text-onblack-light);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ---------- gallery ---------- */
+.gallery {
+  padding: 100px clamp(20px, 8vw, 120px);
+  background: var(--offwhite);
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  padding: 0;
+  border: 1px solid var(--border-gold-soft);
+  border-radius: 14px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.gallery-item:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(11, 11, 13, 0.92);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+
+.lightbox img {
+  max-width: min(720px, 100%);
+  max-height: 85vh;
+  width: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: clamp(20px, 6vw, 48px);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold-light);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 /* ---------- payment ---------- */
@@ -420,7 +485,7 @@
 .payment-item svg {
   width: 36px;
   height: 36px;
-  color: var(--primary);
+  color: var(--gold-dark);
 }
 
 .payment-item span {
@@ -432,22 +497,42 @@
 
 /* ---------- contact ---------- */
 .contact {
+  position: relative;
   text-align: center;
   padding: 110px clamp(20px, 8vw, 120px);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(201, 169, 97, 0.18) 0%, transparent 60%),
+    var(--black);
   color: var(--white);
+  overflow: hidden;
+}
+
+.contact-squiggle {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  color: var(--gold);
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .contact h2 {
   color: var(--white);
   font-size: clamp(30px, 4vw, 44px);
   margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .contact p {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-onblack-light);
   max-width: 480px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-actions {
@@ -456,15 +541,18 @@
   gap: 16px;
   margin-top: 36px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---------- footer ---------- */
 .site-footer {
   text-align: center;
   padding: 32px 20px;
-  background: var(--cream);
-  color: var(--text-light);
+  background: var(--black);
+  color: var(--text-onblack-light);
   font-size: 13px;
+  border-top: 1px solid var(--border-gold-soft);
 }
 
 .site-footer p {
@@ -488,7 +576,7 @@
   .main-nav {
     position: fixed;
     inset: 70px 0 0 0;
-    background: var(--cream);
+    background: var(--black);
     flex-direction: column;
     padding: 32px;
     gap: 24px;
@@ -522,10 +610,14 @@
 
   .about,
   .services,
-  .care,
+  .gallery,
   .payment,
   .contact {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

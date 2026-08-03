@@ -1,21 +1,28 @@
 :root {
-  --primary: rgb(156, 76, 69);
-  --primary-dark: rgb(128, 60, 54);
-  --secondary: rgb(186, 118, 117);
+  --black: #0b0b0d;
+  --black-soft: #16151a;
+  --black-card: #1c1a1f;
+  --gold: #c9a961;
+  --gold-light: #e6cd94;
+  --gold-dark: #9c7d42;
   --white: #ffffff;
-  --cream: #fdf6f5;
-  --blush: #f6e9e8;
-  --text: #4a3433;
-  --text-light: #8a6c69;
-  --border: rgba(156, 76, 69, 0.15);
-  --shadow: 0 20px 45px -20px rgba(156, 76, 69, 0.35);
+  --offwhite: #f8f6f2;
+  --cream: #f1ece3;
+  --text: #201d1a;
+  --text-light: #6b6259;
+  --text-onblack: #efe9df;
+  --text-onblack-light: #b3a99a;
+  --border-gold: rgba(201, 169, 97, 0.28);
+  --border-gold-soft: rgba(201, 169, 97, 0.14);
+  --shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.55);
+  --shadow-gold: 0 18px 40px -18px rgba(201, 169, 97, 0.45);
 
   --serif: 'Cormorant Garamond', 'Georgia', serif;
   --sans: 'Jost', 'Segoe UI', sans-serif;
 
   font: 18px/1.6 var(--sans);
   color: var(--text);
-  background: var(--cream);
+  background: var(--offwhite);
   color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -45,7 +52,7 @@ h2,
 h3 {
   font-family: var(--serif);
   font-weight: 600;
-  color: var(--primary-dark);
+  color: var(--black);
   margin: 0;
 }
 

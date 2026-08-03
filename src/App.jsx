@@ -1,70 +1,69 @@
 import { useState } from 'react'
 import './App.css'
+import lauraPhoto from './assets/laura.jpg'
 
-const WHATSAPP_LINK = 'https://wa.me/5579998813429'
+const WHATSAPP_LINK =
+  'https://wa.me/5579998813429?text=Ol%C3%A1%2C%20Laura!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.'
 const INSTAGRAM_LINK = 'https://instagram.com/studiolaurafabiana'
 
 const NAV_LINKS = [
   { href: '#sobre', label: 'Sobre' },
   { href: '#servicos', label: 'Serviços' },
-  { href: '#cuidados', label: 'Cuidados' },
+  { href: '#galeria', label: 'Galeria' },
   { href: '#contato', label: 'Contato' },
 ]
 
 const SERVICE_CATEGORIES = [
   {
-    title: 'Alongamento em Gel',
+    title: 'Alongamentos',
     items: [
-      { name: 'Fibra de Vidro', price: 150, maintenance: 100 },
-      { name: 'Molde F1', price: 150, maintenance: 100 },
-      { name: 'Banho em Gel', price: 100, maintenance: 80 },
+      { name: 'Fibra de Vidro', price: 160 },
+      { name: 'Molde F1', price: 160 },
+      { name: 'Molde Russo', price: 160 },
+      { name: 'Manutenção de Alongamento', price: 120 },
+    ],
+  },
+  {
+    title: 'Banho de Gel',
+    items: [
+      { name: 'Aplicação do Banho de Gel', price: 120 },
+      { name: 'Manutenção do Banho de Gel', price: 100 },
     ],
   },
   {
     title: 'Esmaltação em Gel',
     items: [
-      { name: 'Mãos', price: 90, maintenance: 90 },
-      { name: 'Pés', price: 50, maintenance: 50 },
+      { name: 'Mãos', price: 90, note: 'serviço individual, sem manutenção' },
+      { name: 'Pés', price: 55 },
     ],
   },
   {
-    title: 'Manicure & Pedicure',
+    title: 'Remoção',
     items: [
-      { name: 'Manicure', price: 35 },
-      { name: 'Pedicure', price: 35 },
-      { name: 'Combo (mãos + pés)', price: 65 },
-      { name: 'Spa dos Pés', price: 70 },
-    ],
-  },
-  {
-    title: 'Detalhes & Extras',
-    items: [
-      { name: 'Remoção de unha', price: 20 },
-      { name: 'Reposição de unha', price: 5, unit: 'unidade' },
-      { name: 'Baby Boomer', price: 5, unit: 'mão' },
-      { name: 'Encapsulado', price: 5, unit: 'mão' },
-      { name: 'Decoração 3D', price: 5, unit: 'mão' },
+      {
+        name: 'Remoção de Gel',
+        price: 50,
+        note: 'retirada do material, cutilagem e cuidados pós-remoção',
+      },
     ],
   },
 ]
 
-const CARE_INFO = [
+const DECOR_INFO = [
   {
-    title: 'Alongamento',
-    text: 'O procedimento dura em torno de 1h30 a 2h, dependendo da técnica escolhida e do estado atual da sua unha.',
+    title: 'Decoração Simples',
+    text: 'Já inclusa em todos os serviços de alongamento e esmaltação.',
   },
   {
-    title: 'Remoção',
-    text: 'A remoção leva em torno de 30 minutos a 1h30 para ser realizada com todo o cuidado.',
+    title: 'Decoração Especial',
+    text: 'Encapsulada, Nail Art 3D e outras artes exclusivas — valor adicional sob consulta, de acordo com a arte escolhida.',
   },
-  {
-    title: 'Atendimento personalizado',
-    text: 'Cada cliente é única. Eu te ajudo a escolher a técnica ideal para o seu estilo e rotina.',
-  },
-  {
-    title: 'Pontualidade',
-    text: 'Se programe para não se atrasar — a tolerância é de 15 minutos, para não prejudicar a próxima cliente.',
-  },
+]
+
+const ABOUT_TEXT = [
+  'Natural do interior da Paraíba e com o coração acolhido por Aracaju, transformo o cuidado com as unhas em uma experiência única de autoestima e sofisticação.',
+  'Em 2021, dei início à minha jornada como Nail Designer, movida pela paixão e pelo compromisso com a excelência. Sou especialista em fibra de vidro realista, além de dominar as técnicas de alongamento nos moldes F1 e Russo, e a criação de nail arts exclusivas.',
+  'Acredito que cada cliente é única. Por isso, meu atendimento é totalmente personalizado, aliando técnica avançada, saúde para as unhas e uma estética natural e elegante para destacar o melhor de cada pessoa.',
 ]
 
 const PAYMENT_METHODS = [
@@ -88,6 +87,14 @@ const PAYMENT_METHODS = [
   },
 ]
 
+const galleryModules = import.meta.glob('./assets/servicos/*.jpg', {
+  eager: true,
+  import: 'default',
+})
+const GALLERY_IMAGES = Object.keys(galleryModules)
+  .sort()
+  .map((key) => galleryModules[key])
+
 function formatPrice(value) {
   return value.toLocaleString('pt-BR', {
     style: 'currency',
@@ -107,14 +114,14 @@ function Squiggle({ className }) {
         d="M2 140C30 100 20 40 55 25 90 10 95 70 130 75 165 80 150 20 198 30"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2.5"
+        strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M10 175C45 155 50 115 80 120 110 125 95 175 140 165 175 157 165 110 196 100"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2.5"
+        strokeWidth="2"
         strokeLinecap="round"
         opacity="0.6"
       />
@@ -141,12 +148,13 @@ function Icon({ children }) {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState(null)
 
   return (
     <>
       <header className="site-header">
         <a className="brand" href="#top">
-          <span className="brand-name">Laura Fabiana</span>
+          <span className="brand-name">Laura Nails</span>
           <span className="brand-tagline">Nail Designer</span>
         </a>
 
@@ -178,45 +186,35 @@ function App() {
         <section className="hero">
           <Squiggle className="hero-squiggle hero-squiggle--top" />
           <Squiggle className="hero-squiggle hero-squiggle--bottom" />
-          <p className="eyebrow">Studio Laura Fabiana</p>
+          <p className="eyebrow">Laura Nails &middot; Aracaju</p>
           <h1>
-            Unhas lindas, <em>cuidado de verdade</em>
+            Unhas em gel com <em>técnica e sofisticação</em>
           </h1>
           <p className="hero-lead">
-            Especialista em unhas em gel desde 2021. Atendimento personalizado,
-            acolhedor e pensado para realçar a sua beleza e autoestima.
+            Alongamento, banho de gel, esmaltação e nail art. Cada
+            atendimento é pensado para valorizar suas mãos com elegância e
+            cuidado de verdade.
           </p>
           <div className="hero-actions">
             <a className="btn btn-primary" href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
               Agendar no WhatsApp
             </a>
-            <a className="btn btn-ghost" href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
-              @studiolaurafabiana
+            <a className="btn btn-ghost" href="#servicos">
+              Ver valores
             </a>
           </div>
         </section>
 
         <section id="sobre" className="about">
           <div className="about-portrait">
-            <span><img src="src/assets/LFimg.png" alt="Laura Fabiana" /></span>
+            <img src={lauraPhoto} alt="Laura Fabiana, nail designer" />
           </div>
           <div className="about-content">
             <p className="eyebrow">Quem sou eu?</p>
             <h2>Laura Fabiana</h2>
-            <p>
-              Sou especialista em unhas em gel desde 2021. Natural do interior
-              da Paraíba, trago comigo o carinho, o cuidado e a dedicação
-              típicos de quem ama o que faz.
-            </p>
-            <p>
-              Ao longo dos anos, fui aperfeiçoando minhas técnicas para
-              oferecer às minhas clientes não só unhas lindas e duradouras,
-              mas também uma experiência acolhedora e personalizada.
-            </p>
-            <p>
-              Cada atendimento é único e pensado com muito carinho, porque
-              acredito que beleza também é sobre autoestima e bem-estar.
-            </p>
+            {ABOUT_TEXT.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
             <p className="about-signoff">
               Seja bem-vinda ao meu studio. Vai ser um prazer cuidar de você!
             </p>
@@ -235,15 +233,10 @@ function App() {
                     <li key={item.name}>
                       <div className="service-name">
                         {item.name}
-                        {item.unit ? <span className="service-unit"> / {item.unit}</span> : null}
+                        {item.note ? <span className="service-note">{item.note}</span> : null}
                       </div>
                       <div className="service-prices">
                         <span className="service-price">{formatPrice(item.price)}</span>
-                        {item.maintenance ? (
-                          <span className="service-maintenance">
-                            manutenção {formatPrice(item.maintenance)}
-                          </span>
-                        ) : null}
                       </div>
                     </li>
                   ))}
@@ -251,18 +244,34 @@ function App() {
               </div>
             ))}
           </div>
-        </section>
 
-        <section id="cuidados" className="care">
-          <Squiggle className="care-squiggle" />
-          <p className="eyebrow eyebrow-center">Sobre os procedimentos</p>
-          <h2 className="section-title">Boas práticas para o seu atendimento</h2>
-          <div className="care-grid">
-            {CARE_INFO.map((item) => (
-              <div className="care-card" key={item.title}>
+          <div className="decor-grid">
+            {DECOR_INFO.map((item) => (
+              <div className="decor-card" key={item.title}>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </div>
+            ))}
+          </div>
+
+          <p className="services-footnote">
+            Todos os serviços incluem cutilagem e cuidados pós-atendimento.
+          </p>
+        </section>
+
+        <section id="galeria" className="gallery">
+          <p className="eyebrow eyebrow-center">Meu trabalho</p>
+          <h2 className="section-title">Galeria</h2>
+          <div className="gallery-grid">
+            {GALLERY_IMAGES.map((src, index) => (
+              <button
+                type="button"
+                className="gallery-item"
+                key={src}
+                onClick={() => setLightboxImage(src)}
+              >
+                <img src={src} alt={`Trabalho de unhas ${index + 1}`} loading="lazy" />
+              </button>
             ))}
           </div>
         </section>
@@ -280,6 +289,7 @@ function App() {
         </section>
 
         <section id="contato" className="contact">
+          <Squiggle className="contact-squiggle" />
           <h2>Vamos agendar o seu horário?</h2>
           <p>
             Fale comigo pelo WhatsApp ou acompanhe meu trabalho no Instagram.
@@ -296,9 +306,23 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <p>Studio Laura Fabiana &middot; Unhas em Gel</p>
+        <p>Laura Nails &middot; Unhas em Gel</p>
         <p>&copy; {new Date().getFullYear()} Todos os direitos reservados.</p>
       </footer>
+
+      {lightboxImage ? (
+        <div className="lightbox" onClick={() => setLightboxImage(null)}>
+          <button
+            type="button"
+            className="lightbox-close"
+            aria-label="Fechar imagem"
+            onClick={() => setLightboxImage(null)}
+          >
+            ×
+          </button>
+          <img src={lightboxImage} alt="Trabalho de unhas em destaque" />
+        </div>
+      ) : null}
     </>
   )
 }
