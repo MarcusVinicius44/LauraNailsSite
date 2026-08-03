@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import lauraPhoto from './assets/laura.jpg'
 
@@ -147,7 +147,24 @@ function Icon({ children }) {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [lightboxImage, setLightboxImage] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  const isLightboxOpen = lightboxIndex !== null
+  const showPrev = () =>
+    setLightboxIndex((index) => (index - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length)
+  const showNext = () =>
+    setLightboxIndex((index) => (index + 1) % GALLERY_IMAGES.length)
+
+  useEffect(() => {
+    if (!isLightboxOpen) return
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') setLightboxIndex(null)
+      if (event.key === 'ArrowLeft') showPrev()
+      if (event.key === 'ArrowRight') showNext()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isLightboxOpen])
 
   return (
     <>
@@ -281,15 +298,22 @@ function App() {
         <section id="galeria" className="gallery">
           <p className="eyebrow eyebrow-center">Meu trabalho</p>
           <h2 className="section-title">Galeria</h2>
+          <p className="gallery-lead">Clique em uma foto para ver em destaque</p>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, index) => (
               <button
                 type="button"
                 className="gallery-item"
                 key={src}
-                onClick={() => setLightboxImage(src)}
+                onClick={() => setLightboxIndex(index)}
               >
                 <img src={src} alt={`Trabalho de unhas ${index + 1}`} loading="lazy" />
+                <span className="gallery-overlay">
+                  <Icon>
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.3-4.3M11 8v6M8 11h6" />
+                  </Icon>
+                </span>
               </button>
             ))}
           </div>
@@ -329,17 +353,54 @@ function App() {
         <p>&copy; {new Date().getFullYear()} Todos os direitos reservados.</p>
       </footer>
 
-      {lightboxImage ? (
-        <div className="lightbox" onClick={() => setLightboxImage(null)}>
+      {isLightboxOpen ? (
+        <div className="lightbox" onClick={() => setLightboxIndex(null)}>
           <button
             type="button"
             className="lightbox-close"
             aria-label="Fechar imagem"
-            onClick={() => setLightboxImage(null)}
+            onClick={() => setLightboxIndex(null)}
           >
             ×
           </button>
-          <img src={lightboxImage} alt="Trabalho de unhas em destaque" />
+
+          <button
+            type="button"
+            className="lightbox-arrow lightbox-arrow--prev"
+            aria-label="Foto anterior"
+            onClick={(event) => {
+              event.stopPropagation()
+              showPrev()
+            }}
+          >
+            <Icon>
+              <path d="m15 18-6-6 6-6" />
+            </Icon>
+          </button>
+
+          <img
+            src={GALLERY_IMAGES[lightboxIndex]}
+            alt="Trabalho de unhas em destaque"
+            onClick={(event) => event.stopPropagation()}
+          />
+
+          <button
+            type="button"
+            className="lightbox-arrow lightbox-arrow--next"
+            aria-label="Próxima foto"
+            onClick={(event) => {
+              event.stopPropagation()
+              showNext()
+            }}
+          >
+            <Icon>
+              <path d="m9 6 6 6-6 6" />
+            </Icon>
+          </button>
+
+          <span className="lightbox-counter">
+            {lightboxIndex + 1} / {GALLERY_IMAGES.length}
+          </span>
         </div>
       ) : null}
     </>
