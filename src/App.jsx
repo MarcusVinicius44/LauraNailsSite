@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import lauraPhoto from './assets/laura.jpg'
 
-const WHATSAPP_LINK = 'https://wa.me/message/KVYQKSMI4INPE1'
+const WHATSAPP_LINK = 'https://wa.me/5579998813429?text=Ol%C3%A1%20Laura!!%20Vim%20pelo%20Site%20e%20quero%20agendar'
 const INSTAGRAM_LINK = 'https://instagram.com/laurafabiananail__'
 
 const NAV_LINKS = [
@@ -94,6 +94,8 @@ const GALLERY_IMAGES = Object.keys(galleryModules)
   .sort()
   .map((key) => galleryModules[key])
 
+const GALLERY_PREVIEW_COUNT = 8
+
 function formatPrice(value) {
   return value.toLocaleString('pt-BR', {
     style: 'currency',
@@ -148,6 +150,12 @@ function Icon({ children }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(null)
+  const [showAllPhotos, setShowAllPhotos] = useState(false)
+
+  const visibleImages = showAllPhotos
+    ? GALLERY_IMAGES
+    : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT)
+  const hiddenCount = GALLERY_IMAGES.length - GALLERY_PREVIEW_COUNT
 
   const isLightboxOpen = lightboxIndex !== null
   const showPrev = () =>
@@ -300,7 +308,7 @@ function App() {
           <h2 className="section-title">Galeria</h2>
           <p className="gallery-lead">Clique em uma foto para ver em destaque</p>
           <div className="gallery-grid">
-            {GALLERY_IMAGES.map((src, index) => (
+            {visibleImages.map((src, index) => (
               <button
                 type="button"
                 className="gallery-item"
@@ -317,6 +325,23 @@ function App() {
               </button>
             ))}
           </div>
+
+          {hiddenCount > 0 ? (
+            <button
+              type="button"
+              className="gallery-toggle"
+              onClick={() => setShowAllPhotos((show) => !show)}
+            >
+              {showAllPhotos ? (
+                'Ver menos'
+              ) : (
+                <>Ver mais fotos ({hiddenCount})</>
+              )}
+              <Icon>
+                <path d={showAllPhotos ? 'm18 15-6-6-6 6' : 'm6 9 6 6 6-6'} />
+              </Icon>
+            </button>
+          ) : null}
         </section>
 
         <section className="payment">

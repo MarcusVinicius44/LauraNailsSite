@@ -480,6 +480,35 @@
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
+.gallery-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 40px auto 0;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-gold);
+  background: transparent;
+  color: var(--gold-dark);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.gallery-toggle:hover {
+  background: rgba(201, 169, 97, 0.1);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.gallery-toggle svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gold-dark);
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
