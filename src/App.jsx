@@ -16,24 +16,25 @@ const SERVICE_CATEGORIES = [
   {
     title: 'Alongamentos',
     items: [
-      { name: 'Fibra de Vidro', price: 160 },
-      { name: 'Molde F1', price: 160 },
-      { name: 'Molde Russo', price: 160 },
-      { name: 'Manutenção de Alongamento', price: 120 },
+      { name: 'Fibra de Vidro', price: 150 },
+      { name: 'Manutenção de Fibra de Vidro', price: 130 },
+      { name: 'Molde F1', price: 140 },
+      { name: 'Molde Russo', price: 140 },
+      { name: 'Manutenção de Molde F1 / Russo', price: 120 },
     ],
   },
   {
     title: 'Banho de Gel',
     items: [
-      { name: 'Aplicação do Banho de Gel', price: 120 },
-      { name: 'Manutenção do Banho de Gel', price: 100 },
+      { name: 'Aplicação do Banho de Gel', price: 110 },
+      { name: 'Manutenção do Banho de Gel', price: 90 },
     ],
   },
   {
     title: 'Esmaltação em Gel',
     items: [
-      { name: 'Mãos', price: 90, note: 'serviço individual, sem manutenção' },
-      { name: 'Pés', price: 55 },
+      { name: 'Mãos', price: 75, note: 'serviço individual, sem manutenção' },
+      { name: 'Pés', price: 50 },
     ],
   },
   {
