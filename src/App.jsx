@@ -4,6 +4,11 @@ import lauraPhoto from './assets/laura.jpg'
 
 const WHATSAPP_LINK = 'https://wa.me/5579998813429?text=Ol%C3%A1%20Laura!!%20Vim%20pelo%20Site%20e%20quero%20agendar'
 const INSTAGRAM_LINK = 'https://instagram.com/laurafabiananail__'
+const ADDRESS_STREET = 'Rua Rio Grande do Sul, 1051'
+const ADDRESS_CITY = 'Novo Paraíso, Aracaju - SE'
+const ADDRESS_QUERY = encodeURIComponent('Rua Rio Grande do Sul, 1051 - Novo Paraíso, Aracaju - SE, 49082-000')
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${ADDRESS_QUERY}&output=embed`
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${ADDRESS_QUERY}`
 
 const NAV_LINKS = [
   { href: '#sobre', label: 'Sobre' },
@@ -345,17 +350,85 @@ function App() {
           ) : null}
         </section>
 
-        <section className="payment">
-          <p className="eyebrow eyebrow-center">Formas de pagamento</p>
-          <div className="payment-list">
-            {PAYMENT_METHODS.map((method) => (
-              <div className="payment-item" key={method.label}>
-                <Icon>{method.icon}</Icon>
-                <span>{method.label}</span>
+        <section id="endereco" className="address">
+          <div className="address-inner">
+            <p className="eyebrow">Endereço</p>
+            <h2 className="address-title">Venha me visitar</h2>
+            <div className="address-content">
+              <div className="address-map">
+                <iframe
+                  title="Mapa com a localização do Laura Nails"
+                  src={MAP_EMBED_URL}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
-            ))}
+              <div className="address-info">
+                <div className="address-item">
+                  <span className="address-icon">
+                    <Icon>
+                      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </Icon>
+                  </span>
+                  <div>
+                    <h3>Endereço</h3>
+                    <p>{ADDRESS_STREET}</p>
+                    <p>{ADDRESS_CITY}</p>
+                  </div>
+                </div>
+                <div className="address-item">
+                  <span className="address-icon">
+                    <Icon>
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+                    </Icon>
+                  </span>
+                  <div>
+                    <h3>WhatsApp</h3>
+                    <p>
+                      <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
+                        (79) 99881-3429
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <div className="address-item">
+                  <span className="address-icon">
+                    <Icon>
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <path d="M17.5 6.5h.01" />
+                    </Icon>
+                  </span>
+                  <div>
+                    <h3>Instagram</h3>
+                    <p>
+                      <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
+                        @laurafabiananail__
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <a className="btn btn-primary address-cta" href={MAP_LINK} target="_blank" rel="noreferrer">
+                  Como chegar
+                </a>
+              </div>
+            </div>
           </div>
         </section>
+
+        <section className="payment">
+                  <p className="eyebrow eyebrow-center">Formas de pagamento</p>
+                  <div className="payment-list">
+                    {PAYMENT_METHODS.map((method) => (
+                      <div className="payment-item" key={method.label}>
+                        <Icon>{method.icon}</Icon>
+                        <span>{method.label}</span>
+                      </div>
+                    ))}
+                  </div>
+          </section>
 
         <section id="contato" className="contact">
           <Squiggle className="contact-squiggle" />
